@@ -23,7 +23,6 @@ def index(row=None, col=None):
             session["board"][row][col] = session["turn"]
             # See if Win
             for i in range(3):
-                print(session["board"][i])
                 if session["board"][i] == [session["turn"], session["turn"], session["turn"]]:
                     session["status"] = str(session["turn"]) + " Wins"
             for j in range (3):
