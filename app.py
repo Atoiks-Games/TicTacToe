@@ -20,20 +20,22 @@ def index(row=None, col=None):
     else:
         try:
             # Make a move
-            session["board"][row][col] = session["turn"]
+            turn = session["turn"]
+            session["board"][row][col] = turn
+            board = session["board"]
             # See if Win
             for i in range(3):
-                if session["board"][i] == [session["turn"], session["turn"], session["turn"]]:
-                    status = str(session["turn"]) + " Wins"
-            for j in range (3):
-                if session["board"][0][j] == session["board"][1][j] == session["board"][2][j] == session["turn"]:
-                    status = str(session["turn"]) + " Wins"
-            if session["board"][0][0] == session["board"][1][1] == session["board"][2][2] == session["turn"]:
-                status = str(session["turn"]) + " Wins"
-            if session["board"][2][0] == session["board"][1][1] == session["board"][0][2] == session["turn"]:
-                status = str(session["turn"]) + " Wins"
+                if board[i] == [turn, turn, turn]:
+                    status = str(turn) + " Wins"
+            for j in range(3):
+                if turn == board[0][j] == board[1][j] == board[2][j]:
+                    status = str(turn) + " Wins"
+            if turn == board[0][0] == board[1][1] == board[2][2]:
+                status = str(turn) + " Wins"
+            if turn == board[2][0] == board[1][1] == board[0][2]:
+                status = str(turn) + " Wins"
             # Change turn
-            if session["turn"] == "X":
+            if turn == "X":
                 session["turn"] = "O"
             else:
                 session["turn"] = "X"
