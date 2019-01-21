@@ -9,6 +9,19 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+def player_won(board, turn):
+    for i in range(3):
+        if board[i] == [turn, turn, turn]:
+            return true
+    for j in range(3):
+        if turn == board[0][j] == board[1][j] == board[2][j]:
+            return true
+    if turn == board[0][0] == board[1][1] == board[2][2]:
+        return true
+    if turn == board[2][0] == board[1][1] == board[0][2]:
+        return true
+    return false
+
 @app.route("/")
 @app.route("/<int:row>/<int:col>")
 def index(row=None, col=None):
@@ -24,21 +37,14 @@ def index(row=None, col=None):
             session["board"][row][col] = turn
             board = session["board"]
             # See if Win
-            for i in range(3):
-                if board[i] == [turn, turn, turn]:
-                    status = str(turn) + " Wins"
-            for j in range(3):
-                if turn == board[0][j] == board[1][j] == board[2][j]:
-                    status = str(turn) + " Wins"
-            if turn == board[0][0] == board[1][1] == board[2][2]:
+            if player_won(board, turn):
                 status = str(turn) + " Wins"
-            if turn == board[2][0] == board[1][1] == board[0][2]:
-                status = str(turn) + " Wins"
-            # Change turn
-            if turn == "X":
-                session["turn"] = "O"
             else:
-                session["turn"] = "X"
+                # Change turn
+                if turn == "X":
+                    session["turn"] = "O"
+                else:
+                    session["turn"] = "X"
         except TypeError:
             del session["board"]
             return redirect(url_for("index"))
