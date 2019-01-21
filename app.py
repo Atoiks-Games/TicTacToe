@@ -12,15 +12,15 @@ Session(app)
 def player_won(board, turn):
     for i in range(3):
         if board[i] == [turn, turn, turn]:
-            return true
+            return True
     for j in range(3):
         if turn == board[0][j] == board[1][j] == board[2][j]:
-            return true
+            return True
     if turn == board[0][0] == board[1][1] == board[2][2]:
-        return true
+        return True
     if turn == board[2][0] == board[1][1] == board[0][2]:
-        return true
-    return false
+        return True
+    return False
 
 @app.route("/")
 @app.route("/<int:row>/<int:col>")
