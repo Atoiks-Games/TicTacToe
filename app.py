@@ -26,11 +26,11 @@ def index(row=None, col=None):
                 if session["board"][i] == [session["turn"], session["turn"], session["turn"]]:
                     session["status"] = str(session["turn"]) + " Wins"
             for j in range (3):
-                if session["board"][0][j] == session["board"][1][j] and session["board"][0][j] == session["board"][2][j] and session["board"][0][j] == session["turn"]:
+                if session["board"][0][j] == session["board"][1][j] == session["board"][2][j] == session["turn"]:
                     session["status"] = str(session["turn"]) + " Wins"
-            if session["board"][0][0] == session["board"][1][1] and session["board"][0][0] == session["board"][2][2] and session["board"][0][0] == session["turn"]:
+            if session["board"][0][0] == session["board"][1][1] == session["board"][2][2] == session["turn"]:
                 session["status"] = str(session["turn"]) + " Wins"
-            if session["board"][2][0] == session["board"][1][1] and session["board"][2][0] == session["board"][0][2] and session["board"][2][0] == session["turn"]:
+            if session["board"][2][0] == session["board"][1][1] == session["board"][0][2] == session["turn"]:
                 session["status"] = str(session["turn"]) + " Wins"
             # Change turn
             if session["turn"] == "X":
