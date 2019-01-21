@@ -13,10 +13,10 @@ Session(app)
 @app.route("/<int:row>/<int:col>")
 def index(row=None, col=None):
 
+    status = "In Play"
     if "board" not in session:
         session["board"] = [[None, None, None], [None, None, None], [None, None, None]]
         session["turn"] = "X"
-        session["status"] = "In Play"
     else:
         try:
             # Make a move
@@ -24,14 +24,14 @@ def index(row=None, col=None):
             # See if Win
             for i in range(3):
                 if session["board"][i] == [session["turn"], session["turn"], session["turn"]]:
-                    session["status"] = str(session["turn"]) + " Wins"
+                    status = str(session["turn"]) + " Wins"
             for j in range (3):
                 if session["board"][0][j] == session["board"][1][j] == session["board"][2][j] == session["turn"]:
-                    session["status"] = str(session["turn"]) + " Wins"
+                    status = str(session["turn"]) + " Wins"
             if session["board"][0][0] == session["board"][1][1] == session["board"][2][2] == session["turn"]:
-                session["status"] = str(session["turn"]) + " Wins"
+                status = str(session["turn"]) + " Wins"
             if session["board"][2][0] == session["board"][1][1] == session["board"][0][2] == session["turn"]:
-                session["status"] = str(session["turn"]) + " Wins"
+                status = str(session["turn"]) + " Wins"
             # Change turn
             if session["turn"] == "X":
                 session["turn"] = "O"
@@ -40,7 +40,7 @@ def index(row=None, col=None):
         except TypeError:
             del session["board"]
             return redirect(url_for("index"))
-    return render_template("game.html", game=session["board"], turn=session["turn"], message=session["status"])
+    return render_template("game.html", game=session["board"], turn=session["turn"], message=status)
 
 @app.route("/play/<int:row>/<int:col>")
 def play(row, col):
