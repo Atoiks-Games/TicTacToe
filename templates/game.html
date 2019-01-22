@@ -32,17 +32,15 @@
             {% for i in range(3) %}
                 <tr>
                     {% for j in range(3) %}
-                        <td>
-                            {% if game[i][j] %}
-                                {{ game[i][j] }}
+                        {% if game[i][j] %}
+                            <td>{{ game[i][j] }}</td>
+                        {% else %}
+                            {% if message == "In Play" %}
+                                <td onclick="window.location='{{ url_for('play', row=i, col=j) }}';">Play {{ turn }} here</td>
                             {% else %}
-                                {% if message == "In Play" %}
-                                    <a href="{{ url_for('play', row=i, col=j) }}">Play {{ turn }} here.</a>
-                                {% else %}
-                                    -
-                                {% endif %}
+                                <td>-</td>
                             {% endif %}
-                        </td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             {% endfor %}
