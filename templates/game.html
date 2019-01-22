@@ -5,6 +5,8 @@
         <style>
             table {
                 border-collapse: collapse;
+                margin-left: auto;
+                margin-right:auto;
             }
             td {
                 border: 1px solid black;
@@ -19,9 +21,10 @@
         </style>
     </head>
     <body>
-        <h1>
-            {{ message }}
-        </h1>
+        <h1 style="text-align: center">Tic Tac Toe<h1>
+        <h2 style="text-align: center">
+            Status: {{ message }}
+        </h2>
         <table>
             {% for i in range(3) %}
                 <tr>
@@ -41,8 +44,10 @@
                 </tr>
             {% endfor %}
         </table>
-        <form action="/">
-            <input type="submit" value="reset">
-        </from>
+        <div style="text-align: center; margin: 10px">
+            <form action="/">
+                <input type="submit" value="reset">
+            </from>
+        </div>
     </body>
 </html>
