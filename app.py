@@ -39,7 +39,7 @@ def index(row=None, col=None):
             # See if Win
             if player_won(board, turn):
                 status = str(turn) + " Wins"
-            elif None not in [y for y in x for x in lst]:
+            elif None not in [y for y in x for x in board]:
                 status = "Draw"
             else:
                 # Change turn
